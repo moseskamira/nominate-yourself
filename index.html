@@ -1,0 +1,926 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your work matters. Nominate yourself for recognition and opportunities you deserve.">
+  <title>Nominate Yourself — Your Next Chapter Starts Here</title>
+
+  <style>
+    :root {
+      --ink: #17251f;
+      --green: #176b4d;
+      --lime: #d7f36b;
+      --cream: #f7f7f1;
+      --muted: #64716a;
+      --line: #e3e8df;
+      --white: #ffffff;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .topbar {
+      background: var(--ink);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .topbar strong {
+      color: var(--lime);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 247, 241, 0.96);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand-mark {
+      background: var(--lime);
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 21px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: white;
+    }
+
+    .btn-dark:hover {
+      background: var(--green);
+    }
+
+    .btn-outline {
+      border: 1px solid #cfd8ce;
+      background: transparent;
+    }
+
+    .hero {
+      padding: 85px 0 75px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: 1;
+      letter-spacing: -4px;
+      margin: 22px 0;
+    }
+
+    h1 em {
+      color: var(--green);
+      font-family: Georgia, serif;
+      font-weight: 400;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 500px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-art {
+      min-height: 440px;
+      border-radius: 30px;
+      background: #dfe9d7;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-art::before {
+      content: "✳";
+      position: absolute;
+      right: 25px;
+      top: -70px;
+      color: var(--lime);
+      font-size: 260px;
+      line-height: 1;
+    }
+
+    .art-note {
+      z-index: 1;
+      position: relative;
+      background: white;
+      padding: 17px;
+      border-radius: 15px;
+      max-width: 250px;
+      box-shadow: 0 10px 35px #17251f12;
+    }
+
+    .art-note strong {
+      display: block;
+      font-size: 18px;
+      margin-top: 5px;
+    }
+
+    .art-center {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .art-center .symbol {
+      font-size: 110px;
+      line-height: 1.2;
+    }
+
+    .art-center h2 {
+      font-size: 32px;
+      line-height: 1.1;
+    }
+
+    .art-center p {
+      margin-top: 10px;
+      color: #526158;
+    }
+
+    .ticker {
+      background: var(--lime);
+      padding: 17px;
+      overflow: hidden;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .section-head h2,
+    .form-intro h2 {
+      font-size: clamp(35px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-top: 12px;
+    }
+
+    .section-head p {
+      max-width: 400px;
+      color: var(--muted);
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 17px;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      min-height: 225px;
+      transition: 0.2s;
+    }
+
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px #17251f0d;
+    }
+
+    .cat-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      background: #eff4e8;
+      border-radius: 14px;
+      font-size: 24px;
+      margin-bottom: 22px;
+    }
+
+    .category h3 {
+      margin-bottom: 9px;
+      font-size: 18px;
+    }
+
+    .category p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .category a {
+      color: var(--green);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .how {
+      background: #edf0e7;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .step {
+      border-top: 1px solid #cbd5c8;
+      padding-top: 25px;
+    }
+
+    .step-num {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .step h3 {
+      margin: 15px 0 10px;
+      font-size: 22px;
+    }
+
+    .step p {
+      color: var(--muted);
+    }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .form-intro p {
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    .tip {
+      background: #edf0e7;
+      border-left: 3px solid var(--green);
+      padding: 18px;
+      margin-top: 25px;
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+    }
+
+    .tip strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 15px 45px #17251f0b;
+    }
+
+    .form-card h3 {
+      font-size: 24px;
+    }
+
+    .form-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 5px 0 25px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #dbe2d9;
+      border-radius: 11px;
+      padding: 13px;
+      background: #fcfcfa;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px #176b4d15;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 22px;
+    }
+
+    .privacy {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notice {
+      display: none;
+      margin-top: 18px;
+      background: #eff7df;
+      padding: 14px;
+      border-radius: 10px;
+      color: #244e35;
+      font-size: 14px;
+    }
+
+    .notice.show {
+      display: block;
+    }
+
+    .quote-panel {
+      background: var(--ink);
+      color: white;
+      border-radius: 28px;
+      padding: 48px;
+    }
+
+    .quote-panel blockquote {
+      font-family: Georgia, serif;
+      font-size: clamp(28px, 4vw, 45px);
+      line-height: 1.2;
+    }
+
+    .quote-panel em {
+      color: var(--lime);
+    }
+
+    .quote-panel p {
+      color: #b7c4bb;
+      margin-top: 20px;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .form-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav .btn {
+        padding: 10px 13px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 55px 0;
+      }
+
+      h1 {
+        font-size: 53px;
+      }
+
+      .hero-art {
+        min-height: 350px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .categories {
+        gap: 10px;
+      }
+
+      .category {
+        padding: 16px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .form-card {
+        padding: 20px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .form-bottom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .form-bottom .btn {
+        width: 100%;
+      }
+
+      .quote-panel {
+        padding: 28px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    Your next opportunity could start with one brave step.
+    <strong>Make yourself visible.</strong>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <span class="brand-mark">N.</span>
+        <span>nominate<span style="color:var(--green)">yourself</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#why">About</a>
+        <a href="#categories">Categories</a>
+        <a href="#how">How it works</a>
+      </nav>
+
+      <a class="btn btn-dark" href="#nomination">
+        Start a nomination ↗
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">A little recognition goes a long way</span>
+
+          <h1>Your work.<br>Your story.<br><em>Your moment.</em></h1>
+
+          <p class="hero-copy">
+            You don't have to wait for someone else to notice your impact.
+            Put your name forward, share what makes you proud, and open
+            the door to what's next.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#nomination">Nominate yourself ↗</a>
+            <a class="btn btn-outline" href="#how">See how it works ↓</a>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="art-note">
+            ✳ A reminder for you
+            <strong>You're allowed to shine.</strong>
+          </div>
+
+          <div class="art-center">
+            <div class="symbol" aria-hidden="true">✦</div>
+            <h2>Believe in<br>what you bring.</h2>
+            <p>Your next chapter starts with you.</p>
+          </div>
+
+          <div class="art-note">
+            <strong>Make the first move.</strong>
+            Your experience, ideas and effort are worth sharing.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker">
+      BE SEEN ✳ CELEBRATE PROGRESS ✳ OWN YOUR STORY ✳ FIND YOUR NEXT STEP
+    </div>
+
+    <section id="why">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Why put yourself forward?</span>
+            <h2>Confidence isn't bragging. It's giving your work a chance.</h2>
+          </div>
+
+          <p>
+            You have put in the hours, learned the lessons and made a
+            difference. Self-nomination helps people hear directly from
+            the person who knows your journey best: you.
+          </p>
+        </div>
+
+        <div class="categories" id="categories">
+          <article class="category">
+            <div class="cat-icon">✦</div>
+            <h3>Awards & recognition</h3>
+            <p>Celebrate your achievements and the difference you make.</p>
+            <a href="#nomination">Put your name forward ↗</a>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon">↗</div>
+            <h3>Career opportunities</h3>
+            <p>Take the next step toward roles, fellowships and new challenges.</p>
+            <a href="#nomination">Explore your next step ↗</a>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon">◎</div>
+            <h3>Leadership & community</h3>
+            <p>Bring your ideas and commitment to the places that need them.</p>
+            <a href="#nomination">Make an impact ↗</a>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon">✳</div>
+            <h3>Creative & innovation</h3>
+            <p>Share the projects, solutions and ideas you're building.</p>
+            <a href="#nomination">Share your work ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="container">
+        <span class="eyebrow">Simple by design</span>
+
+        <h2 style="font-size:clamp(35px,4vw,54px);line-height:1.1;letter-spacing:-2px;margin-top:12px">
+          Three steps from “maybe someday” to “here I am.”
+        </h2>
+
+        <div class="steps">
+          <article class="step">
+            <span class="step-num">STEP 01 — REFLECT</span>
+            <h3>Choose your opportunity</h3>
+            <p>
+              Think about what you're aiming for and the experience or
+              impact that makes you a strong candidate.
+            </p>
+          </article>
+
+          <article class="step">
+            <span class="step-num">STEP 02 — TELL YOUR STORY</span>
+            <h3>Make your case</h3>
+            <p>
+              Share your journey, achievements and what you hope to do
+              next. Keep it honest and specific.
+            </p>
+          </article>
+
+          <article class="step">
+            <span class="step-num">STEP 03 — TAKE THE LEAP</span>
+            <h3>Send it out into the world</h3>
+            <p>
+              Submit your details and use your nomination as the beginning
+              of a bigger conversation.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="nomination">
+      <div class="container form-layout">
+        <div class="form-intro">
+          <span class="eyebrow">This is your invitation</span>
+          <h2>Ready to put your name in the room?</h2>
+
+          <p>
+            Start with a few details. There's no need to have the perfect
+            words on the first try — just start with what matters to you.
+          </p>
+
+          <div class="tip">
+            <strong>✦ A tip before you begin</strong>
+            Be specific about your contribution. A real example often says
+            more than a long list of achievements.
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Start your nomination</h3>
+          <p class="form-subtitle">
+            Tell us a little about yourself and what you're aiming for.
+          </p>
+
+          <form id="nominationForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="fullName">Your full name *</label>
+                <input
+                  id="fullName"
+                  name="fullName"
+                  autocomplete="name"
+                  placeholder="e.g. Alex Morgan"
+                  required
+                >
+              </div>
+
+              <div class="field">
+                <label for="email">Email address *</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+                >
+              </div>
+
+              <div class="field full">
+                <label for="category">What are you nominating yourself for? *</label>
+                <select id="category" name="category" required>
+                  <option value="" disabled selected>Choose a category</option>
+                  <option>Awards & recognition</option>
+                  <option>Career opportunities</option>
+                  <option>Leadership & community</option>
+                  <option>Creative & innovation</option>
+                  <option>Other opportunity</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="opportunity">Name of award or opportunity</label>
+                <input
+                  id="opportunity"
+                  name="opportunity"
+                  placeholder="Name of opportunity or programme"
+                >
+              </div>
+
+              <div class="field full">
+                <label for="story">What makes you a strong candidate? *</label>
+                <textarea
+                  id="story"
+                  name="story"
+                  minlength="20"
+                  placeholder="Share your work, achievements, impact or goals..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-bottom">
+              <span class="privacy">
+                Your information should only be used for purposes explained
+                by the website operator.
+              </span>
+
+              <button class="btn btn-dark" type="submit">
+                Submit your interest ↗
+              </button>
+            </div>
+
+            <div class="notice" id="formNotice" role="status" aria-live="polite">
+              Your form passed browser validation. This demo is not connected
+              to a server, so your nomination has not been sent.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="container">
+        <div class="quote-panel">
+          <blockquote>
+            “You can't be chosen for an opportunity people don't know
+            you're <em>ready for.</em>”
+          </blockquote>
+          <p>A little reminder to back yourself.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a href="#home" class="brand">
+        <span class="brand-mark">N.</span>
+        <span>nominate<span style="color:var(--green)">yourself</span></span>
+      </a>
+
+      <span>© <span id="year"></span> Nominate Yourself. Your story matters.</span>
+
+      <div class="footer-links">
+        <a href="#why">About</a>
+        <a href="#how">How it works</a>
+        <a href="#nomination">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const form = document.getElementById("nominationForm");
+    const notice = document.getElementById("formNotice");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      notice.classList.add("show");
+      notice.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    });
+  </script>
+</body>
+</html>
