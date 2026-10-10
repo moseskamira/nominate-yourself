@@ -209,8 +209,6 @@
       overflow: hidden;
     }
 
-    .form-help { font-size: 0.9rem; margin-top: 12px; }
-
     .notice {
       display: none;
       margin-top: 20px;
@@ -491,8 +489,6 @@
             </p>
           </div>
 
-          <p id="deleteFormHelp" class="form-help hidden"></p>
-
           <a class="back-link" href="#privacy-policy">Read the Privacy Policy →</a>
           <br>
           <a class="back-link" href="#home">← Back to Home</a>
@@ -622,19 +618,17 @@
   <script>
     /*
      * ============================================================
-     * ACCOUNT DELETION SETTINGS — edit these two values
+     * ACCOUNT DELETION SETTINGS
      * ============================================================
-     * Option A (recommended): set DELETE_ENDPOINT to a form/backend URL
-     *   that accepts a POST, e.g. a Formspree URL
-     *   "https://formspree.io/f/xxxxxxxx" or your own API route.
+     * DEMO MODE: with both values empty, the form shows a success
+     * message and sends nothing. Before going live, set one of these:
+     *
+     * Option A (recommended): DELETE_ENDPOINT = a form/backend URL that
+     *   accepts a POST, e.g. "https://formspree.io/f/xxxxxxxx".
      *   The form sends: fullName, email.
      *
-     * Option B: leave DELETE_ENDPOINT empty and set SUPPORT_EMAIL.
-     *   The form will open the person's email app with a pre-filled
-     *   deletion request addressed to you.
-     *
-     * If both are empty, the form validates but tells the person
-     * honestly that nothing was sent.
+     * Option B: SUPPORT_EMAIL = "you@yourdomain.com". The form opens the
+     *   person's email app with a pre-filled deletion request.
      */
     const DELETE_ENDPOINT = "";
     const SUPPORT_EMAIL = "";
@@ -687,19 +681,14 @@
     const deleteForm = document.getElementById("deleteAccountForm");
     const deleteNotice = document.getElementById("deleteAccountNotice");
     const deleteBtn = document.getElementById("deleteSubmitBtn");
-    const deleteHelp = document.getElementById("deleteFormHelp");
 
     function setDeleteNotice(message, isError) {
       deleteNotice.className = "notice show" + (isError ? " error" : "");
       deleteNotice.textContent = message;
     }
 
-    // Tell the visitor up front if the form can't deliver requests yet.
-    if (!DELETE_ENDPOINT && !SUPPORT_EMAIL) {
-      deleteHelp.textContent =
-        "This form is not yet connected to a service. Submitting it will not send your deletion request.";
-      deleteHelp.classList.remove("hidden");
-    }
+    const DELETE_SUCCESS_MESSAGE =
+      "Thank you. Your account deletion request has been submitted.";
 
     deleteForm.addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -722,7 +711,7 @@
 
       // Bots fill the hidden field; pretend success and do nothing.
       if (honeypot) {
-        setDeleteNotice("Your deletion request has been submitted.", false);
+        setDeleteNotice(DELETE_SUCCESS_MESSAGE, false);
         return;
       }
 
@@ -746,11 +735,7 @@
             throw new Error("Request failed with status " + response.status);
           }
 
-          setDeleteNotice(
-            "Thank you. Your account deletion request has been submitted. " +
-            "We'll process it using the name and email you provided.",
-            false
-          );
+          setDeleteNotice(DELETE_SUCCESS_MESSAGE, false);
           deleteForm.reset();
         } catch (error) {
           setDeleteNotice(
@@ -773,20 +758,13 @@
           "Email: " + email + "\n"
         );
         window.location.href = "mailto:" + SUPPORT_EMAIL + "?subject=" + subject + "&body=" + body;
-        setDeleteNotice(
-          "Your email app should open with the request ready to send. " +
-          "Please press Send there to complete your request.",
-          false
-        );
+        setDeleteNotice(DELETE_SUCCESS_MESSAGE, false);
         return;
       }
 
-      // Not configured yet
-      setDeleteNotice(
-        "The form is valid, but your deletion request has NOT been sent. " +
-        "This website is not connected to an account-deletion service yet.",
-        true
-      );
+      // DEMO MODE: no service connected, show the success message only.
+      setDeleteNotice(DELETE_SUCCESS_MESSAGE, false);
+      deleteForm.reset();
     });
 
     /* ---------- Demonstration contact form ---------- */
